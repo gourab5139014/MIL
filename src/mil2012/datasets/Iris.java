@@ -13,4 +13,8 @@ import mil2012.DataSetInstance;
  */
 public class Iris extends DataSetInstance{
 
+    public Iris() {
+    }
+
+
 }
