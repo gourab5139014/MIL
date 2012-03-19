@@ -19,5 +19,9 @@ public class DataSetInstance {
     public void storeNext(String dataArray[]){
         System.err.println("Hello from storeNext in DataSetInstance BASE Class");
     }
+    public void show()
+    {
+        System.err.println("Hello from show in DataSetInstance BASE Class");
+    }
 
 }

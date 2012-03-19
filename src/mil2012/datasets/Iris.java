@@ -35,7 +35,21 @@ public class Iris extends DataSetInstance{
             attribute3.add(Float.parseFloat(dataArray[2].trim()));
             attribute4.add(Float.parseFloat(dataArray[3].trim()));
             attribute5.add(dataArray[4].trim());
-            if(!(attribute1.isEmpty() || attribute2.isEmpty() || attribute3.isEmpty() || attribute4.isEmpty() || attribute5.isEmpty() ))
-                System.out.println("Stored Next Row :) ");
+            //if(!(attribute1.isEmpty() || attribute2.isEmpty() || attribute3.isEmpty() || attribute4.isEmpty() || attribute5.isEmpty() ))
+              //  System.out.println("Stored Next Row :) ");
     }
+    @Override
+    public void show()
+    {
+        Object a1[] = attribute1.toArray();
+        Object a2[] = attribute2.toArray();
+        Object a3[] = attribute3.toArray();
+        Object a4[] = attribute4.toArray();
+        Object a5[] = attribute5.toArray();
+        for(int i=0;i<attribute1.size();i++)
+        {
+            System.out.println(a1[i] + " " + a2[i] + " " +a3[i] + " " +a4[i] + " " +a5[i]);
+        }
+    }
+
 }

@@ -71,7 +71,7 @@ public class DataSetGroup {
      // Use the DataSetType to initialize array of instances to proper chilc class
          //Parameters p = Parameters.valueOf(DataSetType);
          this.initFile();
-         int i=0;
+         int i=0,j=0;
          DataSetInstance temp;
          String dataRow;
          String dataArray[];
@@ -90,17 +90,22 @@ public class DataSetGroup {
                  for(i=0;i<number_of_instances;i++) //put a copy of data in each of the instances
                  {
                      dataRow = fileReader.readLine();
-                     System.out.println(" Read from file "+dataRow);
+                     //System.out.println(" Read from file "+dataRow);
                      if(dataRow == null) continue;
                      dataArray = dataRow.split(",");
 
                      //for(String s : dataArray) { System.out.print(" "+s);}
                      //System.out.println("");
-
-                     temp=instances.get(i);
-                     //System.out.println("trying to store "+dataArray[0]+" at iteration "+ i);
-                     temp.storeNext(dataArray);
+                     for(j=0;j<number_of_instances;j++)
+                     {
+                         temp = instances.get(j);
+                        System.out.println("Storing dataRow "+i+" in instance "+j);
+                        temp.storeNext(dataArray);
+                     }
+                     
                  }
+                 //System.out.println(" Display value from 1st instance");
+                 //temp=instances.get(0); temp.show();
                  break;
          }
          this.closeFile();
