@@ -38,8 +38,11 @@ public class DataSetGroup {
     public DataSetGroup(String DataSetType)
     {
         this.DataSetType = DataSetType;
+        infile_name = DataSetType;
+        infile_extension = "data";
         m = new mil(); //Operate MIL from run
         instances = new ArrayList();
+        System.err.println("Running DataSetGroup...");
         this.run();
     }
 
@@ -50,7 +53,7 @@ public class DataSetGroup {
         
         }catch(FileNotFoundException e)
         {
-            System.err.println(e.getStackTrace());
+            System.err.println("Inside Initfile "+e.getLocalizedMessage());
         }
     }
 
@@ -60,32 +63,42 @@ public class DataSetGroup {
         fileReader.close();
         }catch(IOException e)
         {
-            System.err.println(e.getStackTrace());
+            System.err.println("Inside Closefile "+e.getLocalizedMessage());
         }
     }
     private void initInstances() throws Exception
     {
      // Use the DataSetType to initialize array of instances to proper chilc class
-         Parameters p = Parameters.valueOf(DataSetType);
+         //Parameters p = Parameters.valueOf(DataSetType);
          this.initFile();
          int i=0;
          DataSetInstance temp;
          String dataRow;
          String dataArray[];
-
+         int p=DataSetType.hashCode();
+         System.out.println("hash code : "+p+" for "+DataSetType);
+         
          switch(p){
-             case IRIS:
+             case 2287667: //Case for IRIS
+                 System.err.println("case for IRIS");
                  for(i=0;i<number_of_instances;i++)
                  {
                      temp = new Iris();
                      instances.add(temp);
                  }
-
+                 System.out.println(" Instances Empty -> "+instances.isEmpty());
                  for(i=0;i<number_of_instances;i++) //put a copy of data in each of the instances
                  {
                      dataRow = fileReader.readLine();
-                     dataArray = dataRow.split("'");
+                     System.out.println(" Read from file "+dataRow);
+                     if(dataRow == null) continue;
+                     dataArray = dataRow.split(",");
+
+                     //for(String s : dataArray) { System.out.print(" "+s);}
+                     //System.out.println("");
+
                      temp=instances.get(i);
+                     //System.out.println("trying to store "+dataArray[0]+" at iteration "+ i);
                      temp.storeNext(dataArray);
                  }
                  break;
@@ -111,11 +124,13 @@ public class DataSetGroup {
     private void run() 
     {
         try {
+            System.err.println(" Inside RUn..");
             number_of_instances = this.get_number_of_instances();
+            System.err.println(" Instances count :"+number_of_instances);
             this.initInstances();
         }catch(Exception e)
         {
-            System.err.println(e.getStackTrace());
+            System.err.println("Inside Run "+e.getLocalizedMessage());
         }
     }
 

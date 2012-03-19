@@ -18,19 +18,24 @@ public class Main {
      */
     public static void displayMenu() throws Exception
    {
-        int choice=0,number_of_instances=0;
+        int choice=0;
+        int number_of_instances=0;
+
         DataInputStream din = new DataInputStream(System.in);
         final int maxChoice=1; //Declare as constant
         
         do{
-        System.out.println("\n**\tEnter Choice of DataSet\t**");
-        System.out.println("\n1. Iris");
-        System.out.println("\n0. Exit");
+            System.out.println("\n**\tEnter Choice of DataSet\t**");
+            System.out.println("1. Iris");
+            System.out.println("0. Exit");
+            choice=Integer.parseInt(din.readLine());
+            System.err.println("Choice is "+choice);
         }while(choice<0||choice>maxChoice);
         /*
         System.out.println("\n\tNumber of Instances : ");
         number_of_instances=Integer.parseInt(din.readLine());
         */
+        System.err.println("Switch for "+choice);
         switch(choice)
         {
             case 1:
@@ -45,7 +50,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        // TODO code application logic here
+        // TODO test with multiple data files
         try{
         displayMenu();
         }catch(Exception e)

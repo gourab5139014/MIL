@@ -35,5 +35,7 @@ public class Iris extends DataSetInstance{
             attribute3.add(Float.parseFloat(dataArray[2].trim()));
             attribute4.add(Float.parseFloat(dataArray[3].trim()));
             attribute5.add(dataArray[4].trim());
+            if(!(attribute1.isEmpty() || attribute2.isEmpty() || attribute3.isEmpty() || attribute4.isEmpty() || attribute5.isEmpty() ))
+                System.out.println("Stored Next Row :) ");
     }
 }
