@@ -5,15 +5,13 @@
 
 package mil2012;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Gourab
  */
 public class DataSetInstance {
-    ArrayList<Boolean> if_process_element;
-
+    int s; //number of classes
+    
     public DataSetInstance() {
     }
     public void storeNext(String dataArray[]){
@@ -22,6 +20,20 @@ public class DataSetInstance {
     public void show()
     {
         System.err.println("Hello from show in DataSetInstance BASE Class");
+    }
+    public Float[] giveArray(int index) throws Exception
+    {
+        Float[] a = new Float[1]; // RANDOM
+        System.err.println("Hello from giveArray in DataSetInstance BASE Class");
+        return a;
+    }
+    public void storeArray(Float a[],int column)
+    {
+        System.err.println("Hello from storeArray in DataSetInstance BASE Class");
+    }
+    public int getS()
+    {
+        return s;
     }
 
 }

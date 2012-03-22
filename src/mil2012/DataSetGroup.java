@@ -18,8 +18,8 @@ import mil2012.datasets.Iris;
 public class DataSetGroup {
     mil m;
     ArrayList<DataSetInstance> instances;
-
-    int number_of_instances; //Characteristics of the dataset
+    ArrayList<Boolean> if_process_element;
+    int dataSetSize; //Characteristics of the dataset
     
     String DataSetType; //Which child of DataSetInstance
     String infile_name;
@@ -31,7 +31,7 @@ public class DataSetGroup {
          }
     public DataSetGroup() {
         m = new mil();
-        number_of_instances=0;
+        dataSetSize=0;
         this.run();
     }
 
@@ -81,13 +81,14 @@ public class DataSetGroup {
          switch(p){
              case 2287667: //Case for IRIS
                  System.err.println("case for IRIS");
-                 for(i=0;i<number_of_instances;i++)
+                 for(i=0;i<dataSetSize;i++)
                  {
                      temp = new Iris();
+                     temp.s = 3; //no of classes
                      instances.add(temp);
                  }
                  System.out.println(" Instances Empty -> "+instances.isEmpty());
-                 for(i=0;i<number_of_instances;i++) //put a copy of data in each of the instances
+                 for(i=0;i<dataSetSize;i++) //put a copy of data in each of the instances
                  {
                      dataRow = fileReader.readLine();
                      //System.out.println(" Read from file "+dataRow);
@@ -96,7 +97,7 @@ public class DataSetGroup {
 
                      //for(String s : dataArray) { System.out.print(" "+s);}
                      //System.out.println("");
-                     for(j=0;j<number_of_instances;j++)
+                     for(j=0;j<dataSetSize;j++)
                      {
                          temp = instances.get(j);
                         System.out.println("Storing dataRow "+i+" in instance "+j);
@@ -111,7 +112,7 @@ public class DataSetGroup {
          this.closeFile();
     }
 
-    private int get_number_of_instances() throws IOException
+    private int get_dataSetSize() throws IOException
     {
         int no=0;
         this.initFile();
@@ -126,13 +127,20 @@ public class DataSetGroup {
         this.closeFile();
         return no;
     }
-    private void run() 
+    private void set_process_elements()
+    {
+        //CODE
+    }
+    private void run()
     {
         try {
             System.err.println(" Inside RUn..");
-            number_of_instances = this.get_number_of_instances();
-            System.err.println(" Instances count :"+number_of_instances);
+            dataSetSize = this.get_dataSetSize(); //Check this
+            set_process_elements();
+            System.err.println(" DataSet Size :"+dataSetSize);
             this.initInstances();
+            m.setDataSetSize(dataSetSize);
+            //Call mil
         }catch(Exception e)
         {
             System.err.println("Inside Run "+e.getLocalizedMessage());

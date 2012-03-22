@@ -52,4 +52,51 @@ public class Iris extends DataSetInstance{
         }
     }
 
+    @Override
+    public Float[] giveArray(int index) throws Exception
+    {
+        switch(index)
+        {
+            case 0:
+                return attribute1.toArray(new Float[attribute1.size()]);
+            case 1:
+                return attribute2.toArray(new Float[attribute2.size()]);
+            case 2:
+                return attribute3.toArray(new Float[attribute3.size()]);
+            case 3:
+                return attribute4.toArray(new Float[attribute4.size()]);
+            default:
+                throw new Exception("Invalid Request to return a Float array :: The parameter requested contains a class value");
+                
+        }
+    }
+
+    @Override
+    public void storeArray(Float a[],int column)
+    {
+        //store array as column in AL
+        for(int i=0;i<a.length;i++)
+        {
+            switch(column)
+            {
+                case 0:
+                    attribute1.remove(i);
+                    attribute1.add(i, a[i]);
+                    break;
+                case 1:
+                    attribute2.remove(i);
+                    attribute2.add(i, a[i]);
+                    break;
+                case 2:
+                    attribute3.remove(i);
+                    attribute3.add(i, a[i]);
+                    break;
+                case 3:
+                    attribute4.remove(i);
+                    attribute4.add(i, a[i]);
+                    break;
+            }
+        }
+    }
+
 }
