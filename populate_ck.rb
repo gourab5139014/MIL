@@ -3,7 +3,7 @@
 c= 1..10
 k= 1..10
 
-File.open('ck.data','w') do |f|
+File.open('ckIRIS.data','w') do |f|
 	c.zip(k).each do |first,second|
 #		f.printf("%d,%d\n",first,second)
 		f.puts "#{first},#{second}\n"

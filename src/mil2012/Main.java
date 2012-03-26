@@ -19,7 +19,6 @@ public class Main {
     public static void displayMenu() throws Exception
    {
         int choice=0;
-        int number_of_instances=0;
 
         DataInputStream din = new DataInputStream(System.in);
         final int maxChoice=1; //Declare as constant

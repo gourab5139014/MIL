@@ -18,17 +18,15 @@ import mil2012.datasets.Iris;
 public class DataSetGroup {
     mil m;
     ArrayList<DataSetInstance> instances;
-    ArrayList<Boolean> if_process_element;
-    int dataSetSize; //Characteristics of the dataset
+    //ArrayList<Boolean> if_process_element;
+    int dataSetSize; //Number of tupples in the dataSet
+    int instance_count; //no of c,k  value pairs available
     
     String DataSetType; //Which child of DataSetInstance
     String infile_name;
     String infile_extension;
     BufferedReader fileReader;
 
-    public enum Parameters {
-            IRIS
-         }
     public DataSetGroup() {
         m = new mil();
         dataSetSize=0;
@@ -46,21 +44,23 @@ public class DataSetGroup {
         this.run();
     }
 
-    private void initFile()
+    private BufferedReader initFile(String name, String extension)
     {
         try{
-        fileReader = new BufferedReader(new FileReader(infile_name+"."+infile_extension));
+            BufferedReader Reader = new BufferedReader(new FileReader(name+"."+extension));
+            return Reader;
         
         }catch(FileNotFoundException e)
         {
             System.err.println("Inside Initfile "+e.getLocalizedMessage());
+            return null;
         }
     }
 
-    private void closeFile()
+    private void closeFile(BufferedReader Reader)
     {
         try{
-        fileReader.close();
+            Reader.close();
         }catch(IOException e)
         {
             System.err.println("Inside Closefile "+e.getLocalizedMessage());
@@ -70,21 +70,22 @@ public class DataSetGroup {
     {
      // Use the DataSetType to initialize array of instances to proper chilc class
          //Parameters p = Parameters.valueOf(DataSetType);
-         this.initFile();
+         this.fileReader = this.initFile(infile_name,infile_extension);
          int i=0,j=0;
          DataSetInstance temp;
          String dataRow;
          String dataArray[];
          int p=DataSetType.hashCode();
-         System.out.println("hash code : "+p+" for "+DataSetType);
+         System.err.println("hash code : "+p+" for "+DataSetType);
          
          switch(p){
              case 2287667: //Case for IRIS
                  System.err.println("case for IRIS");
-                 for(i=0;i<dataSetSize;i++)
+                 for(i=0;i<instance_count;i++)
                  {
                      temp = new Iris();
-                     temp.s = 3; //no of classes
+                     temp.s = 3; //no of classes in IRIS
+                     temp.attribute_count = 5; //no. of attributes in IRIS
                      instances.add(temp);
                  }
                  System.out.println(" Instances Empty -> "+instances.isEmpty());
@@ -97,7 +98,7 @@ public class DataSetGroup {
 
                      //for(String s : dataArray) { System.out.print(" "+s);}
                      //System.out.println("");
-                     for(j=0;j<dataSetSize;j++)
+                     for(j=0;j<instance_count;j++) //store in instances
                      {
                          temp = instances.get(j);
                         System.out.println("Storing dataRow "+i+" in instance "+j);
@@ -109,13 +110,13 @@ public class DataSetGroup {
                  //temp=instances.get(0); temp.show();
                  break;
          }
-         this.closeFile();
+         this.closeFile(fileReader);
     }
 
-    private int get_dataSetSize() throws IOException
+    private int read_dataSetSize() throws IOException
     {
         int no=0;
-        this.initFile();
+        fileReader = this.initFile(infile_name,infile_extension);
         String dataRow=fileReader.readLine();
 
         do
@@ -124,23 +125,61 @@ public class DataSetGroup {
             no++;
         }while(dataRow != null);
 
-        this.closeFile();
+        this.closeFile(fileReader);
         return no;
     }
-    private void set_process_elements()
+
+    private int read_instanceCount() throws IOException
     {
-        //CODE
+        int no=0;
+        this.fileReader=this.initFile("ck"+DataSetType,"data");
+        String dataRow=fileReader.readLine();
+
+        do
+        {
+            dataRow=fileReader.readLine();
+            no++;
+        }while(dataRow != null);
+
+        this.closeFile(this.fileReader);
+        return no;
+    }
+    
+    private void processMIL()
+    {
+        try{
+            DataSetInstance temp;
+            String dataRow;
+            String dataArray[];
+            //String fileName = "ck"+DataSetType;
+            //System.err.println("Trying to open "+fileName+".data");
+            BufferedReader ckdata = initFile("ck"+DataSetType, "data");
+            for(int i=0;i<instance_count;i++)
+            {
+                dataRow = ckdata.readLine();
+                if (dataRow == null) continue;
+                dataArray = dataRow.split(",");
+                m.setDataSetSize(dataSetSize);
+                m.setC(Integer.parseInt(dataArray[0]));
+                m.setK(Integer.parseInt(dataArray[1]));
+                temp = instances.get(i);
+                m.run(temp);
+            }
+            closeFile(ckdata);
+        }catch(Exception e)
+        {
+            System.err.println("Inside processMIL "+e.getLocalizedMessage());
+        }
     }
     private void run()
     {
         try {
-            System.err.println(" Inside RUn..");
-            dataSetSize = this.get_dataSetSize(); //Check this
-            set_process_elements();
-            System.err.println(" DataSet Size :"+dataSetSize);
+            System.err.println(" Inside Run..");
+            dataSetSize = this.read_dataSetSize();
+            instance_count = this.read_instanceCount();
+            System.err.println(" DataSet Size :"+dataSetSize+" Instances Count (c,k) : "+instance_count);
             this.initInstances();
-            m.setDataSetSize(dataSetSize);
-            //Call mil
+            processMIL();
         }catch(Exception e)
         {
             System.err.println("Inside Run "+e.getLocalizedMessage());

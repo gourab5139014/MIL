@@ -14,31 +14,40 @@ import mil2012.DataSetInstance;
  */
 public class mil {
     int dataSetSize;
+    int c; int k;
     public mil() {
         System.out.println("Hello from mil 130312");
     }
 
-    public void setDataSetSize(int size)
-    {
-        dataSetSize = size;
+    public void setC(int c) {
+        this.c = c;
     }
-    public void run(DataSetInstance d,ArrayList<Boolean> if_process_element) throws Exception
-    {
-        int len = if_process_element.size();
+
+    public void setDataSetSize(int dataSetSize) {
+        this.dataSetSize = dataSetSize;
+    }
+
+    public void setK(int k) {
+        this.k = k;
+    }
+
+    
+    public void run(DataSetInstance d) throws Exception
+    { 
+        int len=d.getAttribute_count(); //total number of attributes in the dataset
         int i=0;
         Float[] temp = new Float[len]; //size of the dataset
-        for(i=0;i<len;i++)
+        for(i=0;i<(len-1);i++)
         {
-            if(if_process_element.get(i))
-            {
+            
                 //extract Float[] for the particular column
                 temp = d.giveArray(i);
 
                 //call algo for that column
-                algo(temp, 1, d.getS()); //GET C FROM SOMEWHERE
+                algo(temp, c, d.getS());
                 //store back Float[] to the corresponsing ArrayList<>
                 d.storeArray(temp, i);
-            }
+            
         }
     }
     private void algo(Float a[],int c,int s)
