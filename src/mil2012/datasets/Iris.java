@@ -39,6 +39,12 @@ public class Iris extends DataSetInstance{
               //  System.out.println("Stored Next Row :) ");
     }
     @Override
+    public String[] giveNext(int i)
+    {
+        String[] dataArray={Float.toString((float)attribute1.get(i)),Float.toString((float)attribute2.get(i)),Float.toString((float)attribute3.get(i)),Float.toString((float)attribute4.get(i)),attribute5.get(i)};
+        return dataArray;
+    }
+    @Override
     public void show()
     {
         Object a1[] = attribute1.toArray();

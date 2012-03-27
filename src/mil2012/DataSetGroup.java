@@ -5,8 +5,11 @@
 
 package mil2012;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import mil2012.algo130312.*;
@@ -160,15 +163,31 @@ public class DataSetGroup {
                 if (dataRow == null) continue;
                 dataArray = dataRow.split(",");
                 m.setDataSetSize(dataSetSize);
-                m.setC(Integer.parseInt(dataArray[0]));
-                m.setK(Integer.parseInt(dataArray[1]));
                 temp = instances.get(i);
+                temp.setC(Integer.parseInt(dataArray[0]));
+                temp.setK(Integer.parseInt(dataArray[1]));
                 m.run(temp);
             }
             closeFile(ckdata);
         }catch(Exception e)
         {
             System.err.println("Inside processMIL "+e.getLocalizedMessage());
+        }
+    }
+    private void resultToFiles()
+    {
+        //Testing output to a directory
+        try{
+        DataSetInstance temp = instances.get(0);
+        String firstName= "."+File.separator+"results"+File.separator +"out"+DataSetType+"_"+temp.getC()+"_"+temp.getK();
+        File outFile = new File(firstName+".data");
+        if(!outFile.exists()) outFile.createNewFile();
+        BufferedWriter writer = new BufferedWriter(new FileWriter(outFile));
+        writer.write(dataSetSize); //Test
+        writer.close();
+        }catch(Exception e)
+        {
+           System.err.println("Inside resultToFile "+e.getLocalizedMessage());
         }
     }
     private void run()
@@ -180,6 +199,7 @@ public class DataSetGroup {
             System.err.println(" DataSet Size :"+dataSetSize+" Instances Count (c,k) : "+instance_count);
             this.initInstances();
             processMIL();
+            resultToFiles();
         }catch(Exception e)
         {
             System.err.println("Inside Run "+e.getLocalizedMessage());

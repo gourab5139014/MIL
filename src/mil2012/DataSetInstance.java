@@ -12,14 +12,33 @@ package mil2012;
 public class DataSetInstance {
     int s; //number of classes
     int attribute_count;
-    
-    public DataSetInstance() {
+    int c; int k;
+
+    public int getC() {
+        return c;
     }
 
+    public int getK() {
+        return k;
+    }
+
+    public void setC(int c) {
+        this.c = c;
+    }
+
+    public void setK(int k) {
+        this.k = k;
+    }
+    
     public int getAttribute_count() {
         return attribute_count;
     }
     
+    public String[] giveNext(int i){
+        String[] a={};
+        System.err.println("Hello from giveNext in DataSetInstance BASE Class");
+        return a;
+    }
     public void storeNext(String dataArray[]){
         System.err.println("Hello from storeNext in DataSetInstance BASE Class");
     }

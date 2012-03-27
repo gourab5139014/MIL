@@ -4,8 +4,6 @@
  */
 
 package mil2012.algo130312;
-
-import java.util.ArrayList;
 import mil2012.DataSetInstance;
 
 /**
@@ -14,24 +12,16 @@ import mil2012.DataSetInstance;
  */
 public class mil {
     int dataSetSize;
-    int c; int k;
+    
     public mil() {
         System.out.println("Hello from mil 130312");
     }
 
-    public void setC(int c) {
-        this.c = c;
-    }
-
-    public void setDataSetSize(int dataSetSize) {
+        public void setDataSetSize(int dataSetSize) {
         this.dataSetSize = dataSetSize;
     }
 
-    public void setK(int k) {
-        this.k = k;
-    }
-
-    
+       
     public void run(DataSetInstance d) throws Exception
     { 
         int len=d.getAttribute_count(); //total number of attributes in the dataset
@@ -44,7 +34,7 @@ public class mil {
                 temp = d.giveArray(i);
 
                 //call algo for that column
-                algo(temp, c, d.getS());
+                algo(temp, d.getC(), d.getS());
                 //store back Float[] to the corresponsing ArrayList<>
                 d.storeArray(temp, i);
             
