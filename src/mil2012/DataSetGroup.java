@@ -174,17 +174,35 @@ public class DataSetGroup {
             System.err.println("Inside processMIL "+e.getLocalizedMessage());
         }
     }
-    private void resultToFiles()
+    private void resultToFiles(String extension)
     {
         //Testing output to a directory
         try{
-        DataSetInstance temp = instances.get(0);
-        String firstName= "."+File.separator+"results"+File.separator +"out"+DataSetType+"_"+temp.getC()+"_"+temp.getK();
-        File outFile = new File(firstName+".data");
-        if(!outFile.exists()) outFile.createNewFile();
-        BufferedWriter writer = new BufferedWriter(new FileWriter(outFile));
-        writer.write(dataSetSize); //Test
-        writer.close();
+            DataSetInstance temp;
+            File outFile;
+            BufferedWriter writer;
+            String[] dataArray;
+
+            for(int i=0;i<instance_count;i++)
+            {
+                temp=instances.get(i);
+                outFile = new File("."+File.separator+"results"+File.separator +"out"+DataSetType+"_"+temp.getC()+"_"+temp.getK()+"."+extension);
+                if(!outFile.exists()) outFile.createNewFile();
+                writer = new BufferedWriter(new FileWriter(outFile));
+                //FETCH DATA HERE
+                for(int j=0;j<dataSetSize;j++)
+                {
+                    dataArray = temp.giveNext(j);
+                    writer.write(dataArray[0]);
+                    for(int k=1;k<(dataArray.length-1);k++)
+                    {
+                        if(extension.equals("csv")) writer.write(","); else writer.write("\t");
+                        writer.write(dataArray[k]);
+                    }
+                    writer.newLine();
+                }
+                writer.close();
+            }
         }catch(Exception e)
         {
            System.err.println("Inside resultToFile "+e.getLocalizedMessage());
@@ -199,7 +217,7 @@ public class DataSetGroup {
             System.err.println(" DataSet Size :"+dataSetSize+" Instances Count (c,k) : "+instance_count);
             this.initInstances();
             processMIL();
-            resultToFiles();
+            resultToFiles("csv");
         }catch(Exception e)
         {
             System.err.println("Inside Run "+e.getLocalizedMessage());
