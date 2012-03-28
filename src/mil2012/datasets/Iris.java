@@ -2,7 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+/*
+ * 1. sepal length in cm
+2. sepal width in cm
+3. petal length in cm
+4. petal width in cm
+5. class:
+-- Iris Setosa
+-- Iris Versicolour
+-- Iris Virginica
 
+*/
 package mil2012.datasets;
 
 import java.util.ArrayList;
@@ -27,7 +37,7 @@ public class Iris extends DataSetInstance{
         attribute5 = new ArrayList<String>();
     }
 
-    @Override // << IS THIS PROBLEMATIC ?
+    @Override
     public void storeNext(String dataArray[]) //Stores next tupple of data in attributes
     {
             attribute1.add(Float.parseFloat(dataArray[0].trim()));

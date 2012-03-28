@@ -19,13 +19,14 @@ public class Main {
     public static void displayMenu() throws Exception
    {
         int choice=0;
-
+        DataSetGroup d;
         DataInputStream din = new DataInputStream(System.in);
-        final int maxChoice=1; //Declare as constant
+        final int maxChoice=2; //Declare as constant
         
         do{
             System.out.println("\n**\tEnter Choice of DataSet\t**");
             System.out.println("1. Iris");
+            System.out.println("2. Haberman");
             System.out.println("0. Exit");
             choice=Integer.parseInt(din.readLine());
             System.err.println("Choice is "+choice);
@@ -38,8 +39,10 @@ public class Main {
         switch(choice)
         {
             case 1:
-                DataSetGroup d = new DataSetGroup("Iris");
+                d = new DataSetGroup("Iris");
                 break;
+            case 2:
+                d = new DataSetGroup("Haberman");
             case 0:
             default:
                 System.out.println("Exiting...");

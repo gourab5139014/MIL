@@ -12,7 +12,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import mil2012.algo130312.*;
+import mil2012.datasets.Haberman;
+import mil2012.mil280312.*;
 import mil2012.datasets.Iris;
 /**
  *
@@ -87,6 +88,7 @@ public class DataSetGroup {
                  for(i=0;i<instance_count;i++)
                  {
                      temp = new Iris();
+                     temp.setType(DataSetType);
                      temp.s = 3; //no of classes in IRIS
                      temp.attribute_count = 5; //no. of attributes in IRIS
                      instances.add(temp);
@@ -108,6 +110,37 @@ public class DataSetGroup {
                         temp.storeNext(dataArray);
                      }
                      
+                 }
+                 //System.out.println(" Display value from 1st instance");
+                 //temp=instances.get(0); temp.show();
+                 break;
+             case -275727164:
+                 System.err.println("case for Haberman");
+                 for(i=0;i<instance_count;i++)
+                 {
+                     temp = new Haberman();
+                     temp.setType(DataSetType);
+                     temp.s = 2; //no of classes in Haberman
+                     temp.attribute_count = 4; //no. of attributes in Haberman
+                     instances.add(temp);
+                 }
+                 System.out.println(" Instances Empty -> "+instances.isEmpty());
+                 for(i=0;i<dataSetSize;i++) //put a copy of data in each of the instances
+                 {
+                     dataRow = fileReader.readLine();
+                     //System.out.println(" Read from file "+dataRow);
+                     if(dataRow == null) continue;
+                     dataArray = dataRow.split(",");
+
+                     //for(String s : dataArray) { System.out.print(" "+s);}
+                     //System.out.println("");
+                     for(j=0;j<instance_count;j++) //store in instances
+                     {
+                         temp = instances.get(j);
+                        System.out.println("Storing dataRow "+i+" in instance "+j);
+                        temp.storeNext(dataArray);
+                     }
+
                  }
                  //System.out.println(" Display value from 1st instance");
                  //temp=instances.get(0); temp.show();
@@ -208,6 +241,32 @@ public class DataSetGroup {
            System.err.println("Inside resultToFile "+e.getLocalizedMessage());
         }
     }
+    
+    /*
+    private void plotInDetail(String extension)
+    {
+        try{
+            DataSetInstance temp;
+            File outFile;
+            BufferedWriter writer;
+            String firstName; String type="CTS"; int arr[];
+            for(int i=0;i<instance_count;i++)
+            {
+                temp = instances.get(i);
+                for(int j=0;j<temp.attribute_count;j++)
+                {
+                    firstName = "."+File.separator+"results"+File.separator+"details"+File.separator+type+"_"+DataSetType+"_C"+temp.getC()+"K"+temp.getK()+"Index"+j;
+                    arr = this.m.getCTS();
+                    this.plotArray(arr, firstName, extension);
+                }
+            }
+        }catch(Exception e)
+        {
+            System.err.println("Inside Plot in Detail - "+e.getLocalizedMessage());
+        }
+    }
+     *
+     */
     private void run()
     {
         try {
@@ -218,6 +277,8 @@ public class DataSetGroup {
             this.initInstances();
             processMIL();
             resultToFiles("csv");
+            //plotArray(m.getCTS(),DataSetType+"CTS","data");
+            //plotArray(m.getMerge(), DataSetType+"Merge", "data");
         }catch(Exception e)
         {
             System.err.println("Inside Run "+e.getLocalizedMessage());

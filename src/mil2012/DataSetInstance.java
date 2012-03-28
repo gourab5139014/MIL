@@ -13,6 +13,16 @@ public class DataSetInstance {
     int s; //number of classes
     int attribute_count;
     int c; int k;
+    String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
 
     public int getC() {
         return c;

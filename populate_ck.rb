@@ -3,7 +3,7 @@
 c= 1..5
 k= [2,3,7,8,9]
 
-File.open('ckIRIS.data','w') do |f|
+File.open('ckHaberman.data','w') do |f|
 	c.zip(k).each do |first,second|
 		f.puts "#{first},#{second}\n"
 	end
