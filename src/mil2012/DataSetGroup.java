@@ -12,8 +12,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import mil2012.algo300312.mil;
 import mil2012.datasets.Haberman;
-import mil2012.mil280312.*;
 import mil2012.datasets.Iris;
 /**
  *
@@ -227,7 +227,7 @@ public class DataSetGroup {
                 {
                     dataArray = temp.giveNext(j);
                     writer.write(dataArray[0]);
-                    for(int k=1;k<(dataArray.length-1);k++)
+                    for(int k=1;k<(dataArray.length);k++)
                     {
                         if(extension.equals("csv")) writer.write(","); else writer.write("\t");
                         writer.write(dataArray[k]);
