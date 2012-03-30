@@ -12,7 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import mil2012.algo300312.mil;
+import mil2012.algo290312.mil;
 import mil2012.datasets.Haberman;
 import mil2012.datasets.Iris;
 /**
@@ -219,7 +219,10 @@ public class DataSetGroup {
             for(int i=0;i<instance_count;i++)
             {
                 temp=instances.get(i);
-                outFile = new File("."+File.separator+"results"+File.separator +"out"+DataSetType+"_"+temp.getC()+"_"+temp.getK()+"."+extension);
+                //Testing creation of dirs
+                new File("."+File.separator+"results"+File.separator+m.getStamp()).mkdirs();
+                //System.out.println("Can Create Dir? "+result);
+                outFile = new File("."+File.separator+"results"+File.separator+m.getStamp()+File.separator +"out"+DataSetType+"_"+temp.getC()+"_"+temp.getK()+"."+extension);
                 if(!outFile.exists()) outFile.createNewFile();
                 writer = new BufferedWriter(new FileWriter(outFile));
                 //FETCH DATA HERE

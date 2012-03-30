@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ This is sir's default algorithm
  */
 
 package mil2012.algo290312;
@@ -19,6 +18,10 @@ public class mil {
     int CTS[];
     int merge[];
     String stamp="algo290312";
+
+    public String getStamp() {
+        return stamp;
+    }
 
     public mil() {
 
@@ -56,10 +59,12 @@ public class mil {
                 //plot CTS/Merge for current Attribute i  for the given C,K
                 //store back Float[] to the corresponsing ArrayList<>
                 plot = this.getCTS();
-                fileName = "."+File.separator+"results"+File.separator+"details"+File.separator+"CTS"+"_"+d.getType()+"_C"+d.getC()+"K"+d.getK()+"Attr"+i;
+                String base = "."+File.separator+"results"+File.separator+stamp+File.separator+"details"+d.getType()+File.separator+"C"+d.getC()+"K"+d.getK();
+                new File(base).mkdirs();
+                fileName = base+File.separator+"CTS"+"Attr"+i;
                 plotArray(plot,fileName,"data");
                 plot = this.getMerge();
-                fileName = "."+File.separator+"results"+File.separator+"details"+File.separator+"Merge"+"_"+d.getType()+"_C"+d.getC()+"K"+d.getK()+"Attr"+i;
+                fileName = base+File.separator+"Merge"+"Attr"+i;
                 plotArray(plot,fileName,"data");
                 d.storeArray(temp, i);
 
