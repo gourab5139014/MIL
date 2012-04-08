@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import mil2012.algo290312.mil;
 import mil2012.datasets.Haberman;
 import mil2012.datasets.Iris;
+import mil2012.datasets.Transfusion;
 /**
  *
  * @author Gourab
@@ -37,11 +38,11 @@ public class DataSetGroup {
         this.run();
     }
 
-    public DataSetGroup(String DataSetType)
+    public DataSetGroup(String DataSetType,String extension)
     {
         this.DataSetType = DataSetType;
         infile_name = DataSetType;
-        infile_extension = "data";
+        infile_extension = extension;
         m = new mil(); //Operate MIL from run
         instances = new ArrayList();
         System.err.println("Running DataSetGroup...");
@@ -122,6 +123,37 @@ public class DataSetGroup {
                      temp.setType(DataSetType);
                      temp.s = 2; //no of classes in Haberman
                      temp.attribute_count = 4; //no. of attributes in Haberman
+                     instances.add(temp);
+                 }
+                 System.out.println(" Instances Empty -> "+instances.isEmpty());
+                 for(i=0;i<dataSetSize;i++) //put a copy of data in each of the instances
+                 {
+                     dataRow = fileReader.readLine();
+                     //System.out.println(" Read from file "+dataRow);
+                     if(dataRow == null) continue;
+                     dataArray = dataRow.split(",");
+
+                     //for(String s : dataArray) { System.out.print(" "+s);}
+                     //System.out.println("");
+                     for(j=0;j<instance_count;j++) //store in instances
+                     {
+                         temp = instances.get(j);
+                        System.out.println("Storing dataRow "+i+" in instance "+j);
+                        temp.storeNext(dataArray);
+                     }
+
+                 }
+                 //System.out.println(" Display value from 1st instance");
+                 //temp=instances.get(0); temp.show();
+                 break;
+             case -326113140: //case for TRANSFUSION
+                 System.err.println("case for Transfusion");
+                 for(i=0;i<instance_count;i++)
+                 {
+                     temp = new Transfusion();
+                     temp.setType(DataSetType);
+                     temp.s = 2; //no of classes in Haberman
+                     temp.attribute_count = 5; //no. of attributes in Haberman
                      instances.add(temp);
                  }
                  System.out.println(" Instances Empty -> "+instances.isEmpty());
