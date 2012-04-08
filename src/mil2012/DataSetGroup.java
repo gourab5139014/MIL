@@ -12,7 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import mil2012.algo290312.mil;
+import mil2012.algo300312.mil;
 import mil2012.datasets.Haberman;
 import mil2012.datasets.Iris;
 import mil2012.datasets.Transfusion;
@@ -152,8 +152,8 @@ public class DataSetGroup {
                  {
                      temp = new Transfusion();
                      temp.setType(DataSetType);
-                     temp.s = 2; //no of classes in Haberman
-                     temp.attribute_count = 5; //no. of attributes in Haberman
+                     temp.s = 2; //no of classes in Transfusion
+                     temp.attribute_count = 5; //no. of attributes in Transfusion
                      instances.add(temp);
                  }
                  System.out.println(" Instances Empty -> "+instances.isEmpty());
@@ -177,6 +177,38 @@ public class DataSetGroup {
                  //System.out.println(" Display value from 1st instance");
                  //temp=instances.get(0); temp.show();
                  break;
+             case 621417391: //case for VERETEBRAL
+                 System.err.println("case for Vertebral");
+                 for(i=0;i<instance_count;i++)
+                 {
+                     temp = new Transfusion();
+                     temp.setType(DataSetType);
+                     temp.s = 3; //no of classes in Vertebral
+                     temp.attribute_count = 7; //no. of attributes in Vertebral
+                     instances.add(temp);
+                 }
+                 System.out.println(" Instances Empty -> "+instances.isEmpty());
+                 for(i=0;i<dataSetSize;i++) //put a copy of data in each of the instances
+                 {
+                     dataRow = fileReader.readLine();
+                     //System.out.println(" Read from file "+dataRow);
+                     if(dataRow == null) continue;
+                     dataArray = dataRow.split(",");
+
+                     //for(String s : dataArray) { System.out.print(" "+s);}
+                     //System.out.println("");
+                     for(j=0;j<instance_count;j++) //store in instances
+                     {
+                         temp = instances.get(j);
+                        System.out.println("Storing dataRow "+i+" in instance "+j);
+                        temp.storeNext(dataArray);
+                     }
+
+                 }
+                 //System.out.println(" Display value from 1st instance");
+                 temp=instances.get(0); temp.show();
+                 break;
+
          }
          this.closeFile(fileReader);
     }

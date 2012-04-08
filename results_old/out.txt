@@ -1,0 +1,57 @@
+
+J48 pruned tree
+------------------
+
+1.625 <= 1.625: CLASS A (216.0/39.0)
+1.625 > 1.625
+|   30.0 <= 41.59375
+|   |   1.625 <= 20: CLASS A (17.0/1.0)
+|   |   1.625 > 20: CLASS B (4.0/1.0)
+|   30.0 > 41.59375: CLASS B (68.0/30.0)
+
+Number of Leaves  : 	4
+
+Size of the tree : 	7
+
+
+Time taken to build model: 0.04 seconds
+Time taken to test model on training data: 0.02 seconds
+
+=== Error on training data ===
+
+Correctly Classified Instances         234               76.7213 %
+Incorrectly Classified Instances        71               23.2787 %
+Kappa statistic                          0.3813
+Mean absolute error                      0.3306
+Root mean squared error                  0.4066
+Relative absolute error                 84.5908 %
+Root relative squared error             92.0571 %
+Total Number of Instances              305     
+
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 193  31 |   a = CLASS A
+  40  41 |   b = CLASS B
+
+
+
+=== Stratified cross-validation ===
+
+Correctly Classified Instances         226               74.0984 %
+Incorrectly Classified Instances        79               25.9016 %
+Kappa statistic                          0.2943
+Mean absolute error                      0.3422
+Root mean squared error                  0.4274
+Relative absolute error                 87.5289 %
+Root relative squared error             96.7783 %
+Total Number of Instances              305     
+
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 192  32 |   a = CLASS A
+  47  34 |   b = CLASS B
+
