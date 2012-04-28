@@ -24,6 +24,7 @@ public class Main {
             System.out.println("2. Haberman");
             System.out.println("3. Transfusion");
             System.out.println("4. Vertebral");
+            //System.out.println("5. Ecoli");
             System.out.println("0. Exit");
             choice=Integer.parseInt(din.readLine());
             System.err.println("Choice is "+choice);
@@ -46,6 +47,9 @@ public class Main {
                 break;
             case 4:
                 d = new DataSetGroup("Vertebral","csv");
+                break;
+            case 5:
+                d = new DataSetGroup("Ecoli","data");
                 break;
             case 0:
             default:

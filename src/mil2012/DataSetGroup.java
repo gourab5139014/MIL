@@ -17,6 +17,7 @@ import mil2012.datasets.Haberman;
 import mil2012.datasets.Iris;
 import mil2012.datasets.Transfusion;
 import mil2012.datasets.Vertebral;
+import mil2012.datasets.ecoli;
 /**
  *
  * @author Gourab
@@ -209,6 +210,37 @@ public class DataSetGroup {
                  //System.out.println(" Display value from 1st instance");
                  temp=instances.get(0); temp.show();
                  break;
+             case 66782382: //case for Ecoli
+                 System.err.println("case for Ecoli");
+                 for(i=0;i<instance_count;i++)
+                 {
+                     temp = new ecoli();
+                     temp.setType(DataSetType);
+                     temp.s = 8; //no of classes in ecoli
+                     temp.attribute_count = 8; //no. of attributes in ecoli
+                     instances.add(temp);
+                 }
+                 System.out.println(" Instances Empty -> "+instances.isEmpty());
+                 for(i=0;i<dataSetSize;i++) //put a copy of data in each of the instances
+                 {
+                     dataRow = fileReader.readLine();
+                     //System.out.println(" Read from file "+dataRow);
+                     if(dataRow == null) continue;
+                     dataArray = dataRow.split(",");
+
+                     //for(String s : dataArray) { System.out.print(" "+s);}
+                     //System.out.println("");
+                     for(j=0;j<instance_count;j++) //store in instances
+                     {
+                         temp = instances.get(j);
+                        System.out.println("Storing dataRow "+i+" in instance "+j);
+                        temp.storeNext(dataArray);
+                     }
+
+                 }
+                 //System.out.println(" Display value from 1st instance");
+                 temp=instances.get(0); temp.show();
+                 break;
 
          }
          this.closeFile(fileReader);
@@ -310,32 +342,7 @@ public class DataSetGroup {
         }
     }
     
-    /*
-    private void plotInDetail(String extension)
-    {
-        try{
-            DataSetInstance temp;
-            File outFile;
-            BufferedWriter writer;
-            String firstName; String type="CTS"; int arr[];
-            for(int i=0;i<instance_count;i++)
-            {
-                temp = instances.get(i);
-                for(int j=0;j<temp.attribute_count;j++)
-                {
-                    firstName = "."+File.separator+"results"+File.separator+"details"+File.separator+type+"_"+DataSetType+"_C"+temp.getC()+"K"+temp.getK()+"Index"+j;
-                    arr = this.m.getCTS();
-                    this.plotArray(arr, firstName, extension);
-                }
-            }
-        }catch(Exception e)
-        {
-            System.err.println("Inside Plot in Detail - "+e.getLocalizedMessage());
-        }
-    }
-     *
-     */
-    private void run()
+       private void run()
     {
         try {
             System.err.println(" Inside Run..");
