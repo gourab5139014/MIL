@@ -16,7 +16,7 @@ public class Main {
         int choice=0;
         DataSetGroup d;
         DataInputStream din = new DataInputStream(System.in);
-        final int maxChoice=4; //Declare as constant
+        final int maxChoice=5; //Declare as constant
         
         do{
             System.out.println("\n**\tEnter Choice of DataSet\t**");
@@ -24,7 +24,7 @@ public class Main {
             System.out.println("2. Haberman");
             System.out.println("3. Transfusion");
             System.out.println("4. Vertebral");
-            //System.out.println("5. Ecoli");
+            System.out.println("5. Ecoli");
             System.out.println("0. Exit");
             choice=Integer.parseInt(din.readLine());
             System.err.println("Choice is "+choice);
@@ -49,7 +49,7 @@ public class Main {
                 d = new DataSetGroup("Vertebral","csv");
                 break;
             case 5:
-                d = new DataSetGroup("Ecoli","data");
+                d = new DataSetGroup("Ecoli","csv");
                 break;
             case 0:
             default:

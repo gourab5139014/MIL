@@ -73,10 +73,11 @@ public class DataSetGroup {
             System.err.println("Inside Closefile "+e.getLocalizedMessage());
         }
     }
-    private void initInstances() throws Exception
+    private void initInstances() //throws Exception
     {
      // Use the DataSetType to initialize array of instances to proper chilc class
          //Parameters p = Parameters.valueOf(DataSetType);
+        try {
          this.fileReader = this.initFile(infile_name,infile_extension);
          int i=0,j=0;
          DataSetInstance temp;
@@ -244,6 +245,10 @@ public class DataSetGroup {
 
          }
          this.closeFile(fileReader);
+        }catch(Exception e)
+        {
+            System.err.println("Inside Initinstances - "+e.getLocalizedMessage());
+        }
     }
 
     private int read_dataSetSize() throws IOException
@@ -357,6 +362,7 @@ public class DataSetGroup {
         }catch(Exception e)
         {
             System.err.println("Inside Run "+e.getLocalizedMessage());
+            e.printStackTrace();
         }
     }
 
