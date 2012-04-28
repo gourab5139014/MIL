@@ -1,5 +1,5 @@
 /*
- This is sir's default algorithm
+ This is old default algorithm
  */
 
 package mil2012.algo290312;
