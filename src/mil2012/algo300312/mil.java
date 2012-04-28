@@ -25,7 +25,7 @@ public class mil {
 
     public mil() {
 
-        System.out.println("Hello from mil 130312");
+        System.out.println("Hello from" + this.stamp);
     }
 
     public int[] getCTS() {

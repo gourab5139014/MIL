@@ -16,6 +16,7 @@ import mil2012.algo300312.mil;
 import mil2012.datasets.Haberman;
 import mil2012.datasets.Iris;
 import mil2012.datasets.Transfusion;
+import mil2012.datasets.Vertebral;
 /**
  *
  * @author Gourab
@@ -94,7 +95,7 @@ public class DataSetGroup {
                      temp.attribute_count = 5; //no. of attributes in IRIS
                      instances.add(temp);
                  }
-                 System.out.println(" Instances Empty -> "+instances.isEmpty());
+                 System.err.println(" Instances Empty -> "+instances.isEmpty());
                  for(i=0;i<dataSetSize;i++) //put a copy of data in each of the instances
                  {
                      dataRow = fileReader.readLine();
@@ -125,7 +126,7 @@ public class DataSetGroup {
                      temp.attribute_count = 4; //no. of attributes in Haberman
                      instances.add(temp);
                  }
-                 System.out.println(" Instances Empty -> "+instances.isEmpty());
+                 System.err.println(" Instances Empty -> "+instances.isEmpty());
                  for(i=0;i<dataSetSize;i++) //put a copy of data in each of the instances
                  {
                      dataRow = fileReader.readLine();
@@ -156,7 +157,7 @@ public class DataSetGroup {
                      temp.attribute_count = 5; //no. of attributes in Transfusion
                      instances.add(temp);
                  }
-                 System.out.println(" Instances Empty -> "+instances.isEmpty());
+                 System.err.println(" Instances Empty -> "+instances.isEmpty());
                  for(i=0;i<dataSetSize;i++) //put a copy of data in each of the instances
                  {
                      dataRow = fileReader.readLine();
@@ -181,7 +182,7 @@ public class DataSetGroup {
                  System.err.println("case for Vertebral");
                  for(i=0;i<instance_count;i++)
                  {
-                     temp = new Transfusion();
+                     temp = new Vertebral();
                      temp.setType(DataSetType);
                      temp.s = 3; //no of classes in Vertebral
                      temp.attribute_count = 7; //no. of attributes in Vertebral
