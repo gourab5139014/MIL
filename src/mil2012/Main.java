@@ -16,7 +16,7 @@ public class Main {
         int choice=0;
         DataSetGroup d;
         DataInputStream din = new DataInputStream(System.in);
-        final int maxChoice=5; //Declare as constant
+        final int maxChoice=6; //Declare as constant
         
         do{
             System.out.println("\n**\tEnter Choice of DataSet\t**");
@@ -51,10 +51,24 @@ public class Main {
             case 5:
                 d = new DataSetGroup("Ecoli","csv");
                 break;
+            case 6:
+                try{
+                System.out.print("Enter the filename? ");
+                String fname=din.readLine();
+                System.out.print("Enter the extension? ");
+                String fext=din.readLine();
+                //System.err.println("checking name "+name);
+                //String filen[] = name.split(".");
+                //System.err.println("Checking spilit "+filen[0]+filen[1]);
+                d = new DataSetGroup(fname,fext);
+                }catch(Exception e)
+                {
+                    System.err.println("Inside Case 6 "+e.getLocalizedMessage());
+                }
+                break;
             case 0:
             default:
                 System.out.println("Exiting...");
-                    
         }
 
     }

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import mil2012.algo300312.mil;
 import mil2012.datasets.Haberman;
 import mil2012.datasets.Iris;
+import mil2012.datasets.Random;
 import mil2012.datasets.Transfusion;
 import mil2012.datasets.Vertebral;
 import mil2012.datasets.ecoli;
@@ -93,7 +94,8 @@ public class DataSetGroup {
                  {
                      temp = new Iris();
                      temp.setType(DataSetType);
-                     temp.s = 3; //no of classes in IRIS
+                     //temp.s = read_numberOfClasses(); //no of classes in IRIS is 3
+                     temp.s = 3;
                      temp.attribute_count = 5; //no. of attributes in IRIS
                      instances.add(temp);
                  }
@@ -242,6 +244,38 @@ public class DataSetGroup {
                  //System.out.println(" Display value from 1st instance");
                  temp=instances.get(0); temp.show();
                  break;
+             default: //for random attribute
+                 System.err.println("case for Random Attribute");
+                 for(i=0;i<instance_count;i++)
+                 {
+                     temp = new Random();
+                     temp.setType(DataSetType);
+                     temp.s = this.read_numberOfClasses(); //no of classes in random
+                     temp.attribute_count = 2; //no. of attributes in random
+                     instances.add(temp);
+                 }
+                 System.out.println(" Instances Empty -> "+instances.isEmpty());
+                 for(i=0;i<dataSetSize;i++) //put a copy of data in each of the instances
+                 {
+                     dataRow = fileReader.readLine();
+                     //System.out.println(" Read from file "+dataRow);
+                     if(dataRow == null) continue;
+                     dataArray = dataRow.split(",");
+
+                     //for(String s : dataArray) { System.out.print(" "+s);}
+                     //System.out.println("");
+                     for(j=0;j<instance_count;j++) //store in instances
+                     {
+                         temp = instances.get(j);
+                        System.out.println("Storing dataRow "+i+" in instance "+j);
+                        temp.storeNext(dataArray);
+                     }
+
+                 }
+                 //System.out.println(" Display value from 1st instance");
+                 temp=instances.get(0); temp.show();
+                 break;
+
 
          }
          this.closeFile(fileReader);
@@ -251,17 +285,36 @@ public class DataSetGroup {
         }
     }
 
+    private int read_numberOfClasses() throws IOException{
+        
+        ArrayList<String> classes = new ArrayList<String>();
+        fileReader = this.initFile(infile_name,infile_extension);
+        String dataRow=fileReader.readLine();
+        String dataArray[];
+        while(dataRow != null)
+        {
+            dataArray = dataRow.split(",");
+            if(!classes.contains(dataArray[dataArray.length-1].trim())) {
+             //push the new elem in
+                classes.add(dataArray[dataArray.length-1].trim());
+            }
+            dataRow=fileReader.readLine();
+        }
+
+        //this.closeFile(fileReader);
+        System.err.println("No. of classes in "+DataSetType+" = "+classes.size());
+        return classes.size();
+    }
     private int read_dataSetSize() throws IOException
     {
         int no=0;
         fileReader = this.initFile(infile_name,infile_extension);
         String dataRow=fileReader.readLine();
-
-        do
+        while(dataRow != null)
         {
-            dataRow=fileReader.readLine();
             no++;
-        }while(dataRow != null);
+            dataRow=fileReader.readLine();
+        }
 
         this.closeFile(fileReader);
         return no;
