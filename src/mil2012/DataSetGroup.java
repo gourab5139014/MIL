@@ -80,7 +80,7 @@ public class DataSetGroup {
          //Parameters p = Parameters.valueOf(DataSetType);
         try {
          this.fileReader = this.initFile(infile_name,infile_extension);
-         int i=0,j=0;
+         long i=0;int j=0;
          DataSetInstance temp;
          String dataRow;
          String dataArray[];
@@ -255,10 +255,13 @@ public class DataSetGroup {
                      instances.add(temp);
                  }
                  System.out.println(" Instances Empty -> "+instances.isEmpty());
+                 this.closeFile(fileReader);
+                 this.fileReader = this.initFile(infile_name,infile_extension);
+                 //probably the file pointer is reaching end of stream at this point of code, so nuls are being read later
                  for(i=0;i<dataSetSize;i++) //put a copy of data in each of the instances
                  {
                      dataRow = fileReader.readLine();
-                     //System.out.println(" Read from file "+dataRow);
+                     //System.out.println("Counter "+i+" ,Read from file> "+dataRow);
                      if(dataRow == null) continue;
                      dataArray = dataRow.split(",");
 
@@ -364,7 +367,7 @@ public class DataSetGroup {
     }
     private void resultToFiles(String extension)
     {
-        //Testing output to a directory
+        
         try{
             DataSetInstance temp;
             File outFile;
