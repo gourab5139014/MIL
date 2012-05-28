@@ -54,11 +54,9 @@ public class Main {
             case 6:
                 try{
                 System.out.print("Enter the filename? ");
-                //String fname=din.readLine();
-                String fname="attr0adult";
+                String fname=din.readLine();
                 System.out.print("Enter the extension? ");
-                //String fext=din.readLine();
-                String fext="csv";
+                String fext=din.readLine();
                 //System.err.println("checking name "+name);
                 //String filen[] = name.split(".");
                 //System.err.println("Checking spilit "+filen[0]+filen[1]);
