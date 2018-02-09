@@ -1,13 +1,16 @@
 Designing  a  Data Discretizer for Classification Problems
 
 Project Group:
-?	Project guide – Prof. Bikash K. Sarkar
-?	Team members – 
+*	Project guide â€“ Prof. Bikash K. Sarkar
+*	Team members â€“ 
 1.	Gourab Mitra (BE/1232/08) [ gourab dot mitra at live dot com ]
 2.	Shashidhar Sundareisan (BE/1343/08) [ shashidhar dot sun at gmail dot com ]
+
+Manuscript at https://arxiv.org/abs/1710.05091
 
 ABSTRACT
 	Most  of  the  real-world  problems  involve  continuous  attributes, each  of  which  possesses  more  values. Due  to  exponential growth  of data  in  the  database  systems,  operating on continuous  values  is  comparatively  complex in comparison  to  discrete  values. Therefore, conversion of input  data  sets  with continuous  attributes  into  data  sets with  discrete attributes  is  necessary to  reduce the  range of  values. This  is the goal of data  discretization.
 	Several machine learning algorithms have been developed to our knowledge. However, many of them cannot handle continuous attributes, whereas each of them can operate on discretized attributes. Even if an algorithm can handle continuous attributes its performance can be significantly improved by replacing continuous attributes with its  discretized values. The other advantages  in operating  discretized  attributes are  the  need  of  less memory space and processing  time  in comparison   to  their  non-discretized  form. In  addition,  much  larger  rules  are  produced, while  processing  continuous attributes.    On  the  other  hand, a  disadvantage  of  discretizing  a continuous value in some cases, is  the loss of  the information  in   the available original  data. For example, two different values in  the  same discretization  interval  are  considered  equal, even  though  they  may  be at  two  different  extremes  of  the  interval. Such  an  effect  can  reduce  the  precision  of  Machine Learning  algorithm. The loss  of  information, in  fact,  increases   the  rate  of  misclassification.
 	In  general, most  of  the  discretization  processes  lead  to  a  loss  of  information and  can't reduce values  of  discrete attribute. 
 	The  aim of the present study is to design an  efficient supervised approach to achieve high classification accuracy, and to reduce loss of  information as well as the number of intervals of attributes.  
+
